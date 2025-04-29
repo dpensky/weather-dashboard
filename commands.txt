@@ -1,0 +1,13 @@
+# create dir and init npm
+mkdir weather-dashboard
+cd weather-dashboard
+npm init -y
+
+# install dependencies
+npm install express axios dotenv
+
+# run app
+node server.js
+
+# open in browser
+http://localhost:3000
