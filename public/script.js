@@ -1,10 +1,11 @@
 window.addEventListener('DOMContentLoaded', () => {
   setLanguage();
+  const lang = getBrowserLang();
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        fetch(`/api/weather?lat=${latitude}&lon=${longitude}`)
+        fetch(`/api/weather?lat=${latitude}&lon=${longitude}&lang=${lang}`)
           .then(res => res.json())
           .then(data => displayWeather(data))
           .catch(() => {
@@ -21,8 +22,9 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('searchBtn').addEventListener('click', () => {
+  const lang = getBrowserLang();
   const city = document.getElementById('cityInput').value;
-  fetch(`/api/weather?city=${city}`)
+  fetch(`/api/weather?city=${city}&lang=${lang}`)
     .then(res => res.json())
     .then(data => displayWeather(data))
     .catch(() => {
@@ -31,12 +33,12 @@ document.getElementById('searchBtn').addEventListener('click', () => {
 });
 
 function displayWeather(data) {
+  // console.log(data)
   if (data.main) {
     document.getElementById('weatherResult').innerHTML = `
       <h2>${data.name}</h2>
-      <p>Temp: ${data.main.temp}°C</p>
-      <p>Humidity: ${data.main.humidity}%</p>
-      <p>Weather: ${data.weather[0].description}</p>
+      <p>${data.main.temp}°C</p>
+      <p>${data.weather[0].description}</p>
     `;
   } else {
     document.getElementById('weatherResult').textContent = 'Weather data not found.';
@@ -44,7 +46,7 @@ function displayWeather(data) {
 }
 
 function setLanguage() {
-  const lang = navigator.language.slice(0, 2); // 'en', 'es', 'pt'
+  const lang = getBrowserLang()
   const title = document.getElementById('pageTitle');
   const button = document.getElementById('searchBtn');
   const edit = document.getElementById('cityInput');
@@ -53,16 +55,21 @@ function setLanguage() {
     case 'pt':
       title.textContent = 'Painel do Clima';
       button.textContent = 'Buscar Clima';
-      edit.placeholder="Digite a cidade";
+      edit.placeholder = "Digite a cidade";
       break;
     case 'es':
       title.textContent = 'Panel del Clima';
       button.textContent = 'Buscar Clima';
-      edit.placeholder="Introduzca la ciudad";
+      edit.placeholder = "Introduzca la ciudad";
       break;
     default:
       title.textContent = 'Weather Dashboard';
       button.textContent = 'Get Weather';
-      edit.placeholder="Enter city name";
+      edit.placeholder = "Enter city name";
   }
+}
+
+function getBrowserLang() {
+  const lang = navigator.language.slice(0, 2);
+  return ['pt', 'es'].includes(lang) ? lang : 'en';
 }
