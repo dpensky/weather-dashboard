@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Weather Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- <link rel="stylesheet" href="style.css"> -->
   <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+
+<body class="bg-gradient-to-br from-blue-100 to-blue-300 min-h-screen flex flex-col items-center justify-start p-6">
+  <h1 id="pageTitle" class="text-4xl font-bold mb-6 text-gray-800">Weather Dashboard</h1>
+
+  <div class="flex gap-2 mb-6">
+    <input type="text" id="cityInput" placeholder="Enter city name"
+      class="px-4 py-2 rounded-md shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-400" />
+    <button id="searchBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
+      Get Weather
+    </button>
+  </div>
+
+  <div id="weatherResult" class="bg-white shadow-lg rounded-xl p-6 w-full max-w-md text-center text-gray-700">
+    <!-- Weather results will be injected here -->
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+<!-- <body>
   <h1 id="pageTitle">Weather Dashboard</h1>
   <input type="text" id="cityInput" placeholder="Enter city name">
   <button id="searchBtn">Get Weather</button>
   <div id="weatherResult"></div>
 
   <script src="script.js"></script>
-</body>
+</body> -->
+
 </html>

@@ -35,3 +35,25 @@ app.get('/api/weather', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+app.get('/api/forecast', async (req, res) => {
+  const apiKey = process.env.WEATHER_API_KEY;
+  const { city, lat, lon, lang = 'en' } = req.query;
+
+  let url = '';
+
+  if (city) {
+    url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=${lang}&appid=${apiKey}`;
+  } else if (lat && lon) {
+    url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=${lang}&appid=${apiKey}`;
+  } else {
+    return res.status(400).json({ error: 'City or coordinates required.' });
+  }
+
+  try {
+    const response = await axios.get(url);
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch forecast data.' });
+  }
+});
