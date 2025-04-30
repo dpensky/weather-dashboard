@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
+  setLanguage();
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -39,5 +40,29 @@ function displayWeather(data) {
     `;
   } else {
     document.getElementById('weatherResult').textContent = 'Weather data not found.';
+  }
+}
+
+function setLanguage() {
+  const lang = navigator.language.slice(0, 2); // 'en', 'es', 'pt'
+  const title = document.getElementById('pageTitle');
+  const button = document.getElementById('searchBtn');
+  const edit = document.getElementById('cityInput');
+
+  switch (lang) {
+    case 'pt':
+      title.textContent = 'Painel do Clima';
+      button.textContent = 'Buscar Clima';
+      edit.placeholder="Digite a cidade";
+      break;
+    case 'es':
+      title.textContent = 'Panel del Clima';
+      button.textContent = 'Buscar Clima';
+      edit.placeholder="Introduzca la ciudad";
+      break;
+    default:
+      title.textContent = 'Weather Dashboard';
+      button.textContent = 'Get Weather';
+      edit.placeholder="Enter city name";
   }
 }
