@@ -13,7 +13,8 @@ A simple weather dashboard web app built with **Node.js**, **Express**, and the 
 
 ## 🖼️ Demo
 
-> Add a live link here once deployed (e.g., Render, Railway, etc.)
+https://weather-dashboard-ek8s.onrender.com
+
 
 ![screenshot](screenshot.png) <!-- Add a screenshot of your app -->
 
@@ -33,27 +34,33 @@ weather-dashboard/
 ## 🔧 Installation & Setup
 
 1. **Clone the repo**
+```bash
    git clone https://github.com/your-username/weather-dashboard.git
    cd weather-dashboard
-
+```
 2. **Install dependencies**
+```bash
     npm install
-
+```
 3. **Create a .env file in the root directory**
+```bash
     WEATHER_API_KEY=your_openweathermap_api_key
-
-4 **Run the app**
+```
+4. **Run the app**
+```bash
     node server.js
-
-5 **Visit in browser**
+```
+5. **Visit in browser**
+```bash
     http://localhost:3000
+```
 
 ## 🌐 API Reference
 
 Using OpenWeatherMap API:
 
 Current weather endpoint:
-https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API key}&units=metric
+https://api.openweathermap.org/data/2.5/weather?q={city}&appid={APIkey}&units=metric
 
 ## 📦 Dependencies
 
